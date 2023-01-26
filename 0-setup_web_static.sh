@@ -21,26 +21,5 @@ sudo echo "to test your Nginx configuration">/data/web_static/releases/test/inde
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu /data/ 
 sudo chgrp -R ubuntu /data/
-
-sudo printf %s "server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
-        server_name _;
-        add_header X-Served-By $hostname;
-        location /hbnb_static/ {
-                alias /data/web_static/current/;
-                index index.html index.htm;
-        }
-
-        if ($request_filename ~ redirect_me){
-                rewrite ^ https://youtube.com permanent;
-        }
-        error_page 404 /404.html;
-        location = /404.html {
-                internal;
-        }
-}" > /etc/nginx/sites-available/default
-
+sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}\n' /etc/nginx/sites-available/default
 sudo service nginx restart	
