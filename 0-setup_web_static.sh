@@ -6,21 +6,19 @@
 
 which nginx >/dev/null 2>&1
 a=$(echo $?)
-if [ $a -eq 0 ]
+if [ $a -eq 1 ]
 then
-	echo "NGINX is already installed"
-else
+	
 	sudo apt update
 	sudo apt install nginx
 	sudo ufw allow 'Nginx HTTP'
 	sudo systemctl start nginx
 fi
 
-mkdir -p /data/web_static/releases/test/
-mkdir -p /data/web_static/shared/
-echo "to test your Nginx configuration">/data/web_static/releases/test/index.html
-rm /data/web_static/current
-ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo mkdir -p /data/web_static/releases/test/
+sudo mkdir -p /data/web_static/shared/
+sudo echo "to test your Nginx configuration">/data/web_static/releases/test/index.html
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu /data/ 
 sudo chgrp -R ubuntu /data/
 
