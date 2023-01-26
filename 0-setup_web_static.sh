@@ -1,17 +1,9 @@
 #!/usr/bin/env bash
-# sets up my web servers for the deployment of web_static
-
-which nginx >/dev/null 2>&1
-a=$(echo $?)
-if [ $a -eq 1 ]
-then
 	
-	sudo apt update
-	sudo apt install nginx
-	sudo ufw allow 'Nginx HTTP'
-	sudo systemctl start nginx
-fi
-
+sudo apt update
+sudo apt install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo systemctl start nginx
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
 sudo echo "to test your Nginx configuration">/data/web_static/releases/test/index.html
