@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# sets up my web servers for the deployment of web_static
+# install NGINX if not installed
+# create a fake html content , create a symbolic link
+# change ownership and group uownership to ubuntu
+# updat nginx cofiguration file
 
 which nginx >/dev/null 2>&1
 a=$(echo $?)
