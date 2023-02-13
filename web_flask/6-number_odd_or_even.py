@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+
 """Starts a Flask web application.
 The application listens on 0.0.0.0, port 5000.
 Routes:
@@ -12,7 +13,7 @@ Routes:
     /number_template/<n>: display a HTML page only if n is an integer
     /number_odd_or_even/<n>: display html page saying whether num is odd|even
 """
-
+from flask import abort
 from flask import Flask
 from markupsafe import escape
 from flask import render_template
@@ -64,7 +65,10 @@ def odd_even_templat_number(n):
     """Display an HTML page showing when an odd or even number was
     passed
     """
-    n = int(n)
+    try:
+        n = int(n)
+    except:
+        abort(404)
     if n % 2 == 1:
         k = 'odd'
     else:
