@@ -7,6 +7,7 @@ Routes:
 """
 
 from flask import Flask
+from markupsafe import escape
 
 app = Flask(__name__)
 
@@ -23,10 +24,11 @@ def hnbn():
     return 'HBNB'
 
 
-@app.route('/c/<username>', strict_slashes=False)
-def c_some_text(username):
+@app.route('/c/<text>', strict_slashes=False)
+def c_some_text(text):
     """Display c with some text"""
-    return 'C %s' % escape(username)
+    text = text.replace('_', ' ')
+    return 'C %s' % escape(text)
 
 
 if __name__ == '__main__':
